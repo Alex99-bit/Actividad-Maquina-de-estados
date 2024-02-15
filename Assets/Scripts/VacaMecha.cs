@@ -7,6 +7,9 @@ public class VacaMecha : MonoBehaviour
     public static VacaMecha instance;
     public CowStates currentCowState;
 
+    [SerializeField]
+    int hambre,resitencia,lactancia,estres;
+
     Animator animator;
 
     private void Awake()
@@ -17,6 +20,23 @@ public class VacaMecha : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (hambre == 0)
+        {
+            hambre = 100;
+        }
+
+        if (resitencia == 0)
+        {
+            resitencia = 100;
+        }
+
+        if (lactancia == 0)
+        {
+            lactancia = 30;
+        }
+
+        // El estres se va a modificar unicamente directo del inspector
+
         animator = GetComponent<Animator>();
         SetNewState(CowStates.idle);
     }
@@ -24,6 +44,7 @@ public class VacaMecha : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Aqui se evalua el estado en caso de que se tenga que ejecutar de forma variable o constante algo dependiendo del estado
         switch (currentCowState)
         {
             case CowStates.pastar:
@@ -49,7 +70,8 @@ public class VacaMecha : MonoBehaviour
                 break;
         }
     }
-
+    
+    // Funcion que se llama en caso especial para cambiar de estado y ejecutar algo una sola vez
     public void SetNewState(CowStates newState)
     {
         switch (newState)
