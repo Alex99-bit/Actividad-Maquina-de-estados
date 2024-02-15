@@ -8,7 +8,9 @@ public class VacaMecha : MonoBehaviour
     public CowStates currentCowState;
 
     [SerializeField]
-    int hambre,resitencia,lactancia,estres;
+    int hambre, resitencia, lactancia, estres;
+
+    float timeDriver, timeLapse;
 
     Animator animator;
 
@@ -20,6 +22,7 @@ public class VacaMecha : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /* Valores predeterminados */
         if (hambre == 0)
         {
             hambre = 100;
@@ -37,6 +40,8 @@ public class VacaMecha : MonoBehaviour
 
         // El estres se va a modificar unicamente directo del inspector
 
+        timeLapse = 3f;
+
         animator = GetComponent<Animator>();
         SetNewState(CowStates.idle);
     }
@@ -44,6 +49,8 @@ public class VacaMecha : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Hambre: " + hambre + " Resitencia: " + resitencia + " Lactancia: " + lactancia + " Estres: " + estres);
+
         // Aqui se evalua el estado en caso de que se tenga que ejecutar de forma variable o constante algo dependiendo del estado
         switch (currentCowState)
         {
@@ -57,7 +64,21 @@ public class VacaMecha : MonoBehaviour
 
                 break;
             case CowStates.idle:
-                
+                if (timeDriver >= timeLapse)
+                {
+                    timeDriver = 0;
+                    hambre -= 3;
+                    estres++;
+
+                    if (hambre > 77)
+                    {
+                        lactancia += 3;
+                    }
+                    else if (hambre > 40)
+                    {
+                        lactancia++;
+                    }
+                }
                 break;
             case CowStates.estallar:
 
@@ -69,6 +90,8 @@ public class VacaMecha : MonoBehaviour
 
                 break;
         }
+
+        timeDriver += Time.deltaTime;
     }
     
     // Funcion que se llama en caso especial para cambiar de estado y ejecutar algo una sola vez
