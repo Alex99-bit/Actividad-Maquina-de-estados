@@ -115,10 +115,30 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.ordenia:
-
+                if (timeDriver >= timeLapse)
+                {
+                    timeDriver = 0;
+                    lactancia--;
+                    hambre -= 2;
+                }
                 break;
             case CowStates.jugar:
+                if (timeDriver >= timeLapse)
+                {
+                    timeDriver = 0;
+                    estres -= 5;
+                    hambre -= 3;
+                    resitencia--;
 
+                    if (hambre > 77)
+                    {
+                        lactancia += 3;
+                    }
+                    else if (hambre > 40)
+                    {
+                        lactancia++;
+                    }
+                }
                 break;
             case CowStates.idle:
                 if (timeDriver >= timeLapse)
@@ -138,13 +158,36 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.estallar:
-
+                hambre = 0;
+                resitencia = 0;
+                estres = 0;
+                lactancia = 0;
                 break;
             case CowStates.escapar:
-
+                if (timeDriver >= timeLapse)
+                {
+                    timeDriver = 0;
+                    estres += 5;
+                    hambre -= 2;
+                }
                 break;
             case CowStates.descanso:
+                if (timeDriver >= timeLapse)
+                {
+                    timeDriver = 0;
+                    resitencia += 7;
+                    estres--;
+                    hambre--;
 
+                    if (hambre > 77)
+                    {
+                        lactancia += 3;
+                    }
+                    else if (hambre > 40)
+                    {
+                        lactancia++;
+                    }
+                }
                 break;
         }
 
