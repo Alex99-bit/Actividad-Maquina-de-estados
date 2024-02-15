@@ -12,6 +12,9 @@ public class VacaMecha : MonoBehaviour
 
     float timeDriver, timeLapse;
 
+    [SerializeField]
+    bool asustarse;
+
     Animator animator;
 
     private void Awake()
@@ -41,7 +44,7 @@ public class VacaMecha : MonoBehaviour
         // El estres se va a modificar unicamente directo del inspector
 
         timeLapse = 3f;
-
+        asustarse = false;
         animator = GetComponent<Animator>();
         SetNewState(CowStates.idle);
     }
@@ -113,6 +116,21 @@ public class VacaMecha : MonoBehaviour
                         lactancia++;
                     }
                 }
+
+                if (hambre > 95)
+                {
+                    SetNewState(CowStates.idle);
+                }
+
+                if (asustarse)
+                {
+                    SetNewState(CowStates.escapar);
+                }
+
+                if (lactancia > 80)
+                {
+                    SetNewState(CowStates.ordenia);
+                }
                 break;
             case CowStates.ordenia:
                 if (timeDriver >= timeLapse)
@@ -120,6 +138,21 @@ public class VacaMecha : MonoBehaviour
                     timeDriver = 0;
                     lactancia--;
                     hambre -= 2;
+                }
+
+                if (lactancia < 30)
+                {
+                    SetNewState(CowStates.idle);
+                }
+
+                if (asustarse)
+                {
+                    SetNewState(CowStates.escapar);
+                }
+
+                if (hambre < 40)
+                {
+                    SetNewState(CowStates.pastar);
                 }
                 break;
             case CowStates.jugar:
@@ -139,6 +172,26 @@ public class VacaMecha : MonoBehaviour
                         lactancia++;
                     }
                 }
+
+                if (hambre < 40)
+                {
+                    SetNewState(CowStates.pastar);
+                }
+
+                if (estres > 80)
+                {
+                    SetNewState(CowStates.idle);
+                }
+
+                if (resitencia < 30)
+                {
+                    SetNewState(CowStates.descanso);
+                }
+
+                if (asustarse)
+                {
+                    SetNewState(CowStates.escapar);
+                }
                 break;
             case CowStates.idle:
                 if (timeDriver >= timeLapse)
@@ -156,12 +209,26 @@ public class VacaMecha : MonoBehaviour
                         lactancia++;
                     }
                 }
-                break;
-            case CowStates.estallar:
-                hambre = 0;
-                resitencia = 0;
-                estres = 0;
-                lactancia = 0;
+
+                if (hambre < 30)
+                {
+                    SetNewState(CowStates.pastar);
+                }
+
+                if (estres > 70)
+                {
+                    SetNewState(CowStates.jugar);
+                }
+
+                if (asustarse)
+                {
+                    SetNewState(CowStates.escapar);
+                }
+
+                if (lactancia > 80)
+                {
+                    SetNewState(CowStates.ordenia);
+                }
                 break;
             case CowStates.escapar:
                 if (timeDriver >= timeLapse)
@@ -169,6 +236,21 @@ public class VacaMecha : MonoBehaviour
                     timeDriver = 0;
                     estres += 5;
                     hambre -= 2;
+                }
+
+                if (!asustarse)
+                {
+                    SetNewState(CowStates.descanso);
+                }
+
+                if (estres > 90)
+                {
+                    SetNewState(CowStates.estallar);
+                }
+
+                if (estres > 60 && hambre < 50)
+                {
+                    SetNewState(CowStates.estallar);
                 }
                 break;
             case CowStates.descanso:
@@ -187,6 +269,31 @@ public class VacaMecha : MonoBehaviour
                     {
                         lactancia++;
                     }
+                }
+
+                if (resitencia > 85)
+                {
+                    SetNewState(CowStates.idle);
+                }
+
+                if (hambre < 30)
+                {
+                    SetNewState(CowStates.pastar);
+                }
+
+                if (lactancia > 80)
+                {
+                    SetNewState(CowStates.ordenia);
+                }
+
+                if (asustarse && resitencia > 50)
+                {
+                    SetNewState(CowStates.escapar);
+                }
+
+                if (estres > 60)
+                {
+                    SetNewState(CowStates.jugar);
                 }
                 break;
         }
@@ -214,7 +321,7 @@ public class VacaMecha : MonoBehaviour
 
                 break;
             case CowStates.estallar:
-
+                Destroy(this.gameObject);
                 break;
             case CowStates.escapar:
 
