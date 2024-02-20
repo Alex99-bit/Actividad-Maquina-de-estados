@@ -7,6 +7,8 @@ TagManager:
   - pasto
   - zona
   - milki
+  - cow
+  - wolf
   layers:
   - Default
   - TransparentFX

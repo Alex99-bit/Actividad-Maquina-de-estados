@@ -6,7 +6,9 @@ public class VacaMecha : MonoBehaviour
 {
     public static VacaMecha instance;
     public CowStates currentCowState;
-    public Transform zonaSegura, milki, pasto;
+    public GameObject zonaSegura, milki, pasto;
+
+    private UnityEngine.AI.NavMeshAgent agent;
 
     [SerializeField]
     float hambre, resitencia, lactancia, estres;
@@ -333,6 +335,14 @@ public class VacaMecha : MonoBehaviour
         }
 
         currentCowState = newState;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("wolf"))
+        {
+            SetNewState(CowStates.estallar);
+        }
     }
 }
 
