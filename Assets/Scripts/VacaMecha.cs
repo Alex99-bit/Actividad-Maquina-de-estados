@@ -16,7 +16,7 @@ public class VacaMecha : MonoBehaviour
     float timeDriver, timeLapse;
 
     [SerializeField]
-    bool asustarse;
+    bool asustarse, pastar, ordenia, segura;
 
     Animator animator;
 
@@ -48,6 +48,9 @@ public class VacaMecha : MonoBehaviour
 
         timeLapse = 3f;
         asustarse = false;
+        segura = false;
+        ordenia = false;
+        pastar = false;
         animator = GetComponent<Animator>();
         SetNewState(CowStates.idle);
     }
@@ -104,7 +107,11 @@ public class VacaMecha : MonoBehaviour
         switch (currentCowState)
         {
             case CowStates.pastar:
-                if (timeDriver >= timeLapse)
+                if (!pastar)
+                {
+                    agent.SetDestination(pasto.transform.position);
+                }
+                else if (timeDriver >= timeLapse)
                 {
                     timeDriver = 0;
                     hambre += 7;
