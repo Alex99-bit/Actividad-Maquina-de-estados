@@ -1361,7 +1361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb27b0042f27f31438c185729dbd9129, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.21
+      value: 3.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb27b0042f27f31438c185729dbd9129, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1579,6 +1579,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCowState: 0
+  zonaSegura: {fileID: 0}
+  milki: {fileID: 0}
+  pasto: {fileID: 0}
   hambre: 0
   resitencia: 0
   lactancia: 0
@@ -2658,7 +2661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0001373291
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2692,6 +2695,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2985374647327280367, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.37
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
       propertyPath: m_Name
       value: Wolf
@@ -2699,8 +2706,93 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1436084013}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1436084015}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1436084016}
   m_SourcePrefab: {fileID: 100100000, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
+--- !u!1 &1436084011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
+  m_PrefabInstance: {fileID: 1436084010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1436084013
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436084011}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &1436084015
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436084011}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2382385
+  m_Height: 3.909771
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.1542758, z: 0.4710636}
+--- !u!95 &1436084016
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436084011}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6325b27ae02a5d42ade55a312bb9788, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1744569958
 GameObject:
   m_ObjectHideFlags: 0

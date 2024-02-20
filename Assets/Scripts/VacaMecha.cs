@@ -6,6 +6,7 @@ public class VacaMecha : MonoBehaviour
 {
     public static VacaMecha instance;
     public CowStates currentCowState;
+    public Transform zonaSegura, milki, pasto;
 
     [SerializeField]
     float hambre, resitencia, lactancia, estres;
