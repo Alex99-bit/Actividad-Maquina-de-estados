@@ -143,7 +143,11 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.ordenia:
-                if (timeDriver >= timeLapse)
+                if (!ordenia)
+                {
+                    agent.SetDestination(milki.transform.position);
+                }
+                else if (timeDriver >= timeLapse)
                 {
                     timeDriver = 0;
                     lactancia--;
@@ -264,7 +268,11 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.descanso:
-                if (timeDriver >= timeLapse)
+                if ()
+                {
+
+                }
+                else if (timeDriver >= timeLapse)
                 {
                     timeDriver = 0;
                     resitencia += 7;
@@ -349,6 +357,39 @@ public class VacaMecha : MonoBehaviour
         if (collision.gameObject.CompareTag("wolf"))
         {
             SetNewState(CowStates.estallar);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("zona"))
+        {
+            segura = true;
+        }
+        else if (other.gameObject.CompareTag("milki"))
+        {
+            ordenia = true;
+        }
+        else if (other.gameObject.CompareTag("pasto"))
+        {
+            pastar = true;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("zona"))
+        {
+            segura = false;
+        }
+        else if (other.gameObject.CompareTag("milki"))
+        {
+            ordenia = false;
+        }
+        else if (other.gameObject.CompareTag("pasto"))
+        {
+            pastar = false;
         }
     }
 }

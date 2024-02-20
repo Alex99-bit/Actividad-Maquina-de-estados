@@ -1582,14 +1582,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCowState: 0
-  zonaSegura: {fileID: 355855833}
-  milki: {fileID: 1030675838}
-  pasto: {fileID: 1424125759}
+  zonaSegura: {fileID: 355855829}
+  milki: {fileID: 1030675834}
+  pasto: {fileID: 1424125755}
   hambre: 0
   resitencia: 0
   lactancia: 0
   estres: 0
   asustarse: 0
+  pastar: 0
+  ordenia: 0
+  segura: 0
 --- !u!195 &211474276
 NavMeshAgent:
   m_ObjectHideFlags: 0
