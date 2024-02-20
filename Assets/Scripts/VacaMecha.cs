@@ -250,6 +250,7 @@ public class VacaMecha : MonoBehaviour
                     timeDriver = 0;
                     estres += 5;
                     hambre -= 2;
+                    agent.SetDestination(zonaSegura.transform.position);
                 }
 
                 if (!asustarse)
@@ -268,11 +269,11 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.descanso:
-                if ()
+                if (!segura)
                 {
-
+                    agent.SetDestination(zonaSegura.transform.position);
                 }
-                else if (timeDriver >= timeLapse)
+                else if (timeDriver >= timeLapse && !asustarse)
                 {
                     timeDriver = 0;
                     resitencia += 7;
@@ -365,6 +366,7 @@ public class VacaMecha : MonoBehaviour
         if (other.gameObject.CompareTag("zona"))
         {
             segura = true;
+            asustarse = false;
         }
         else if (other.gameObject.CompareTag("milki"))
         {
