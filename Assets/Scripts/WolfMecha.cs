@@ -13,6 +13,7 @@ public class WolfMecha : MonoBehaviour
     float comida, resitencia, estres;
 
     NavMeshAgent agent;
+    bool comiendo;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,8 @@ public class WolfMecha : MonoBehaviour
         comida = 100;
         estres = 0;
         resitencia = 100;
+
+        comiendo = false;
     }
 
     // Update is called once per frame
@@ -50,26 +53,105 @@ public class WolfMecha : MonoBehaviour
             resitencia = 0;
         }
 
-        if(timeDriver >= timeLapse){
-            switch (currentState)
-            {
-                case WolfState.idle:
-                    
-                break;
-                case WolfState.asechar:
+        switch (currentState)
+        {
+            case WolfState.idle:
+                if(timeDriver >= timeLapse){
+                    comida -= 2;
+                    estres++;
+                    resitencia--;
+                }
 
-                break;
-                case WolfState.comer:
+                if(comida < 30){
+                    SetNewWolfState(WolfState.asechar);
+                }
 
-                break;
-                case WolfState.descanso:
+                if(estres > 60){
+                    SetNewWolfState(WolfState.jugar);
+                }
 
-                break;
-                case WolfState.jugar:
-                
-                break;
-            }     
-        }
+                if(resitencia < 30){
+                    SetNewWolfState(WolfState.descanso);
+                }
+            break;
+            case WolfState.asechar:
+                if(timeDriver >= timeLapse){
+                    comida -= 3;
+                    estres += 4;
+                    resitencia -= 6;
+                }
+
+                if(comida <= 0){
+                    SetNewWolfState(WolfState.muere);
+                }
+
+                if(estres > 80){
+                    SetNewWolfState(WolfState.muere);
+                }
+
+                if(resitencia < 10){
+                    SetNewWolfState(WolfState.muere);
+                }
+
+                if(comiendo){
+                    SetNewWolfState(WolfState.comer);
+                }
+            break;
+            case WolfState.comer:
+                if(timeDriver >= timeLapse){
+                    comida += 3;
+                    //comida = 80;
+                    resitencia++;
+                    estres--;
+                }
+
+                if(comida > 70){
+                    SetNewWolfState(WolfState.jugar);
+                }
+
+                if(estres < 50){
+                    SetNewWolfState(WolfState.idle);
+                }
+            break;
+            case WolfState.descanso:
+                if(timeDriver >= timeLapse){
+                    resitencia += 3;
+                    estres--;
+                    comida -= 4;
+                }
+
+                if(comida < 40){
+                    SetNewWolfState(WolfState.asechar);
+                }
+
+                if(estres < 20){
+                    SetNewWolfState(WolfState.idle);
+                }
+
+                if(resitencia > 80){
+                    SetNewWolfState(WolfState.descanso);
+                }
+            break;
+            case WolfState.jugar:
+                if(timeDriver >= timeLapse){
+                    comida -= 4;
+                    estres -= 5;
+                    resitencia -= 3;
+                }
+
+                if(comida < 30){
+                    SetNewWolfState(WolfState.asechar);
+                }
+
+                if(estres < 20){
+                    SetNewWolfState(WolfState.idle);
+                }
+
+                if(resitencia < 30){
+                    SetNewWolfState(WolfState.descanso);
+                }
+            break;
+        }     
         
 
         timeDriver += Time.deltaTime;
@@ -77,6 +159,8 @@ public class WolfMecha : MonoBehaviour
 
     public void SetNewWolfState(WolfState newState)
     {
+        comiendo = false;
+
         switch (newState)
         {
             case WolfState.idle:
@@ -100,6 +184,12 @@ public class WolfMecha : MonoBehaviour
         }
 
         currentState = newState;
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.CompareTag("cow")){
+            comiendo = true;
+        }
     }
 }
 
