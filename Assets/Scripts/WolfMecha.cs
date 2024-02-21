@@ -10,7 +10,7 @@ public class WolfMecha : MonoBehaviour
     public WolfState currentState;
     public float timeDriver, timeLapse;
 
-    public float radioBusqueda = 20f;
+    public float radioBusqueda = 30f;
 
     float comida, resitencia, estres;
 
@@ -45,7 +45,7 @@ public class WolfMecha : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             // Verifica si el collider pertenece a un objeto con la etiqueta "lobo"
-            if (collider.CompareTag("wolf"))
+            if (collider.CompareTag("cow"))
             {
                 // Obtiene la transformación del lobo
                 Transform transformDelLobo = collider.transform;
@@ -54,7 +54,11 @@ public class WolfMecha : MonoBehaviour
                 float distancia = Vector3.Distance(transform.position, transformDelLobo.position);
 
                 // Ahora puedes hacer lo que necesites con la distancia, como imprimirlo en la consola
-                Debug.Log("Distancia entre este objeto y el lobo: " + distancia);
+                Debug.Log("Distancia entre este objeto y la vaca: " + distancia);
+
+                if(currentState == WolfState.asechar){
+                    agent.SetDestination(collider.transform.position);
+                }
             }
         }
 
@@ -184,6 +188,7 @@ public class WolfMecha : MonoBehaviour
     public void SetNewWolfState(WolfState newState)
     {
         comiendo = false;
+        agent.ResetPath();
 
         switch (newState)
         {
