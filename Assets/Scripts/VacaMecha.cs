@@ -14,7 +14,7 @@ public class VacaMecha : MonoBehaviour
     [SerializeField]
     float hambre, resitencia, lactancia, estres;
 
-    float timeDriver, timeLapse;
+    public float timeDriver, timeLapse;
 
     [SerializeField]
     bool asustarse, pastar, ordenia, segura;
