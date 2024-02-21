@@ -50,27 +50,27 @@ public class WolfMecha : MonoBehaviour
             resitencia = 0;
         }
 
-        switch (currentState)
-        {
-            case WolfState.idle:
+        if(timeDriver >= timeLapse){
+            switch (currentState)
+            {
+                case WolfState.idle:
+                    
+                break;
+                case WolfState.asechar:
+
+                break;
+                case WolfState.comer:
+
+                break;
+                case WolfState.descanso:
+
+                break;
+                case WolfState.jugar:
                 
-            break;
-            case WolfState.asechar:
-
-            break;
-            case WolfState.comer:
-
-            break;
-            case WolfState.descanso:
-
-            break;
-            case WolfState.jugar:
-
-            break;
-            case WolfState.muere:
-
-            break;
+                break;
+            }     
         }
+        
 
         timeDriver += Time.deltaTime;
     }
@@ -95,7 +95,7 @@ public class WolfMecha : MonoBehaviour
 
             break;
             case WolfState.muere:
-
+                Destroy(this.gameObject);
             break;
         }
 
