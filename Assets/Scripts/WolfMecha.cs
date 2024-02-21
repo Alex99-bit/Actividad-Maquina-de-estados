@@ -33,6 +33,8 @@ public class WolfMecha : MonoBehaviour
         resitencia = 100;
 
         comiendo = false;
+
+        SetNewWolfState(WolfState.idle);
     }
 
     // Update is called once per frame
@@ -85,7 +87,9 @@ public class WolfMecha : MonoBehaviour
         switch (currentState)
         {
             case WolfState.idle:
+                agent.SetDestination(idleFollow.position);
                 if(timeDriver >= timeLapse){
+                    timeDriver = 0;
                     comida -= 2;
                     estres++;
                     resitencia--;
@@ -105,6 +109,7 @@ public class WolfMecha : MonoBehaviour
             break;
             case WolfState.asechar:
                 if(timeDriver >= timeLapse){
+                    timeDriver = 0;
                     comida -= 3;
                     estres += 4;
                     resitencia -= 6;
@@ -128,6 +133,7 @@ public class WolfMecha : MonoBehaviour
             break;
             case WolfState.comer:
                 if(timeDriver >= timeLapse){
+                    timeDriver = 0;
                     comida += 3;
                     //comida = 80;
                     resitencia++;
@@ -144,6 +150,7 @@ public class WolfMecha : MonoBehaviour
             break;
             case WolfState.descanso:
                 if(timeDriver >= timeLapse){
+                    timeDriver = 0;
                     resitencia += 3;
                     estres--;
                     comida -= 4;
@@ -163,6 +170,7 @@ public class WolfMecha : MonoBehaviour
             break;
             case WolfState.jugar:
                 if(timeDriver >= timeLapse){
+                    timeDriver = 0;
                     comida -= 4;
                     estres -= 5;
                     resitencia -= 3;
@@ -189,12 +197,12 @@ public class WolfMecha : MonoBehaviour
     public void SetNewWolfState(WolfState newState)
     {
         comiendo = false;
-        agent.ResetPath();
+        //agent.ResetPath();
 
         switch (newState)
         {
             case WolfState.idle:
-                agent.SetDestination(idleFollow.position);
+                
             break;
             case WolfState.asechar:
 
