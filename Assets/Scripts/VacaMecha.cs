@@ -109,13 +109,9 @@ public class VacaMecha : MonoBehaviour
         switch (currentCowState)
         {
             case CowStates.pastar:
-                if (!pastar)
+                if (timeDriver >= timeLapse && pastar)
                 {
-                    agent.SetDestination(pasto.position);
-                }
-                else if (timeDriver >= timeLapse)
-                {
-                    agent.Stop();
+                    agent.isStopped = true;
                     timeDriver = 0;
                     hambre += 7;
                     estres -= 0.3f;
@@ -152,7 +148,7 @@ public class VacaMecha : MonoBehaviour
                 }
                 else if (timeDriver >= timeLapse)
                 {
-                    agent.Stop();
+                    agent.isStopped = true;
                     timeDriver = 0;
                     lactancia--;
                     hambre -= 2;
@@ -273,13 +269,10 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.descanso:
-                if (!segura)
+                
+                if (timeDriver >= timeLapse && !asustarse && segura)
                 {
-                    agent.SetDestination(zonaSegura.position);
-                }
-                else if (timeDriver >= timeLapse && !asustarse)
-                {
-                    agent.Stop();
+                    agent.isStopped = true;
                     timeDriver = 0;
                     resitencia += 7;
                     estres--;
@@ -333,7 +326,7 @@ public class VacaMecha : MonoBehaviour
         switch (newState)
         {
             case CowStates.pastar:
-                
+                agent.SetDestination(pasto.position);
                 break;
             case CowStates.ordenia:
 
@@ -351,7 +344,7 @@ public class VacaMecha : MonoBehaviour
 
                 break;
             case CowStates.descanso:
-
+                agent.SetDestination(zonaSegura.position);
                 break;
         }
 
