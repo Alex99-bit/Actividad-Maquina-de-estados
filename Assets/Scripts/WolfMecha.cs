@@ -10,6 +10,8 @@ public class WolfMecha : MonoBehaviour
     public WolfState currentState;
     public float timeDriver, timeLapse;
 
+    public float radioBusqueda = 20f;
+
     float comida, resitencia, estres;
 
     NavMeshAgent agent;
@@ -35,6 +37,28 @@ public class WolfMecha : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Verifica si hay lobos dentro del radio de búsqueda
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radioBusqueda);
+
+        // Itera a través de todos los colliders encontrados
+        foreach (Collider collider in colliders)
+        {
+            // Verifica si el collider pertenece a un objeto con la etiqueta "lobo"
+            if (collider.CompareTag("wolf"))
+            {
+                // Obtiene la transformación del lobo
+                Transform transformDelLobo = collider.transform;
+
+                // Calcula la distancia entre este objeto y el lobo
+                float distancia = Vector3.Distance(transform.position, transformDelLobo.position);
+
+                // Ahora puedes hacer lo que necesites con la distancia, como imprimirlo en la consola
+                Debug.Log("Distancia entre este objeto y el lobo: " + distancia);
+            }
+        }
+
+
         if(comida >= 100){
             comida = 100;
         }else if(comida <= 0){

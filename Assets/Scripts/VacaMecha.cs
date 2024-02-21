@@ -9,6 +9,8 @@ public class VacaMecha : MonoBehaviour
     public CowStates currentCowState;
     public Transform zonaSegura, milki, pasto;
 
+    public float radioBusqueda = 20f;
+
     private NavMeshAgent agent;
 
     [SerializeField]
@@ -61,6 +63,27 @@ public class VacaMecha : MonoBehaviour
     void Update()
     {
         Debug.Log("Hambre: " + hambre + " Resitencia: " + resitencia + " Lactancia: " + lactancia + " Estres: " + estres);
+
+
+        // Verifica si hay lobos dentro del radio de búsqueda
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radioBusqueda);
+
+        // Itera a través de todos los colliders encontrados
+        foreach (Collider collider in colliders)
+        {
+            // Verifica si el collider pertenece a un objeto con la etiqueta "lobo"
+            if (collider.CompareTag("wolf"))
+            {
+                // Obtiene la transformación del lobo
+                Transform transformDelLobo = collider.transform;
+
+                // Calcula la distancia entre este objeto y el lobo
+                float distancia = Vector3.Distance(transform.position, transformDelLobo.position);
+
+                // Ahora puedes hacer lo que necesites con la distancia, como imprimirlo en la consola
+                Debug.Log("Distancia entre este objeto y el lobo: " + distancia);
+            }
+        }
 
         // hambre, resitencia, lactancia, estres
         // Aqui se asegura de que no sobre pasen los limites
