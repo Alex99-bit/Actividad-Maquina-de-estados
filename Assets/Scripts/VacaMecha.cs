@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VacaMecha : MonoBehaviour
 {
     public static VacaMecha instance;
     public CowStates currentCowState;
-    public GameObject zonaSegura, milki, pasto;
+    public Transform zonaSegura, milki, pasto;
 
-    private UnityEngine.AI.NavMeshAgent agent;
+    private NavMeshAgent agent;
 
     [SerializeField]
     float hambre, resitencia, lactancia, estres;
@@ -52,6 +53,7 @@ public class VacaMecha : MonoBehaviour
         ordenia = false;
         pastar = false;
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
         SetNewState(CowStates.idle);
     }
 
@@ -109,10 +111,11 @@ public class VacaMecha : MonoBehaviour
             case CowStates.pastar:
                 if (!pastar)
                 {
-                    agent.SetDestination(pasto.transform.position);
+                    agent.SetDestination(pasto.position);
                 }
                 else if (timeDriver >= timeLapse)
                 {
+                    agent.Stop();
                     timeDriver = 0;
                     hambre += 7;
                     estres -= 0.3f;
@@ -145,10 +148,11 @@ public class VacaMecha : MonoBehaviour
             case CowStates.ordenia:
                 if (!ordenia)
                 {
-                    agent.SetDestination(milki.transform.position);
+                    agent.SetDestination(milki.position);
                 }
                 else if (timeDriver >= timeLapse)
                 {
+                    agent.Stop();
                     timeDriver = 0;
                     lactancia--;
                     hambre -= 2;
@@ -250,7 +254,7 @@ public class VacaMecha : MonoBehaviour
                     timeDriver = 0;
                     estres += 5;
                     hambre -= 2;
-                    agent.SetDestination(zonaSegura.transform.position);
+                    agent.SetDestination(zonaSegura.position);
                 }
 
                 if (!asustarse)
@@ -271,10 +275,11 @@ public class VacaMecha : MonoBehaviour
             case CowStates.descanso:
                 if (!segura)
                 {
-                    agent.SetDestination(zonaSegura.transform.position);
+                    agent.SetDestination(zonaSegura.position);
                 }
                 else if (timeDriver >= timeLapse && !asustarse)
                 {
+                    agent.Stop();
                     timeDriver = 0;
                     resitencia += 7;
                     estres--;
