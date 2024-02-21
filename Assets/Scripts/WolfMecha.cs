@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WolfMecha : MonoBehaviour
 {
+    public WolfState currentState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +17,18 @@ public class WolfMecha : MonoBehaviour
     {
         
     }
+
+    public void SetNewWolfState()
+    {
+
+    }
+}
+
+public enum WolfState{
+    idle,
+    asechar,
+    jugar,
+    comer,
+    descanso,
+    muere
 }

@@ -111,7 +111,8 @@ public class VacaMecha : MonoBehaviour
             case CowStates.pastar:
                 if (timeDriver >= timeLapse && pastar)
                 {
-                    agent.isStopped = true;
+                    //agent.isStopped = true;
+                    
                     timeDriver = 0;
                     hambre += 7;
                     estres -= 0.3f;
@@ -142,13 +143,10 @@ public class VacaMecha : MonoBehaviour
                 }
                 break;
             case CowStates.ordenia:
-                if (!ordenia)
+                if (timeDriver >= timeLapse && ordenia)
                 {
-                    agent.SetDestination(milki.position);
-                }
-                else if (timeDriver >= timeLapse)
-                {
-                    agent.isStopped = true;
+                    //agent.isStopped = true;
+                    
                     timeDriver = 0;
                     lactancia--;
                     hambre -= 2;
@@ -272,7 +270,8 @@ public class VacaMecha : MonoBehaviour
                 
                 if (timeDriver >= timeLapse && !asustarse && segura)
                 {
-                    agent.isStopped = true;
+                    //agent.isStopped = true;
+                    
                     timeDriver = 0;
                     resitencia += 7;
                     estres--;
@@ -322,6 +321,8 @@ public class VacaMecha : MonoBehaviour
     public void SetNewState(CowStates newState)
     {
         timeDriver = 0;
+        agent.ResetPath();
+        //agent.isStopped = false;
 
         switch (newState)
         {
@@ -329,7 +330,7 @@ public class VacaMecha : MonoBehaviour
                 agent.SetDestination(pasto.position);
                 break;
             case CowStates.ordenia:
-
+                agent.SetDestination(milki.position);
                 break;
             case CowStates.jugar:
 
@@ -361,6 +362,7 @@ public class VacaMecha : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        agent.ResetPath();
         if (other.gameObject.CompareTag("zona"))
         {
             segura = true;
