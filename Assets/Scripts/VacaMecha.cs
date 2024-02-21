@@ -355,7 +355,7 @@ public class VacaMecha : MonoBehaviour
 
                 break;
             case CowStates.idle:
-
+                
                 break;
             case CowStates.estallar:
                 Destroy(this.gameObject);

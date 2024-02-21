@@ -8,6 +8,7 @@ using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 public class WolfMecha : MonoBehaviour
 {
     public WolfState currentState;
+    public Transform idleFollow;
     public float timeDriver, timeLapse;
 
     public float radioBusqueda = 30f;
@@ -193,7 +194,7 @@ public class WolfMecha : MonoBehaviour
         switch (newState)
         {
             case WolfState.idle:
-
+                agent.SetDestination(idleFollow.position);
             break;
             case WolfState.asechar:
 
@@ -218,6 +219,12 @@ public class WolfMecha : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.CompareTag("cow")){
             comiendo = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.CompareTag("zona")){
+            SetNewWolfState(WolfState.idle);
         }
     }
 }
