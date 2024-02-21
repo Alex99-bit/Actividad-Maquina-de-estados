@@ -44,8 +44,10 @@ public class WolfMecha : MonoBehaviour
             estres = 0;
         }
 
-        if(){
-            
+        if(resitencia >= 100){
+            resitencia = 100;
+        }else if(resitencia <= 0){
+            resitencia = 0;
         }
 
         switch (currentState)

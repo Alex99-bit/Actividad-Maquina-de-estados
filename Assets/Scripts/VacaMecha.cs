@@ -68,42 +68,38 @@ public class VacaMecha : MonoBehaviour
         {
             lactancia = 100;
         }
+        else if (lactancia <= 0)
+        {
+            lactancia = 0;
+        }
 
         if (hambre >= 100)
         {
             hambre = 100;
+        }
+        else if (hambre <= 0)
+        {
+            hambre = 0;
         }
 
         if (resitencia >= 100)
         {
             resitencia = 100;
         }
+        else if (resitencia <= 0)
+        {
+            resitencia = 0;
+        }
 
         if (estres >= 100)
         {
             estres = 100;
         }
-
-        // Y aqui que no sean mas bajos
-        if (lactancia <= 0)
-        {
-            lactancia = 0;
-        }
-
-        if (hambre <= 0)
-        {
-            hambre = 0;
-        }
-
-        if (resitencia <= 0)
-        {
-            resitencia = 0;
-        }
-
-        if (estres <= 0)
+        else if (estres <= 0)
         {
             estres = 0;
         }
+
 
         // Aqui se evalua el estado en caso de que se tenga que ejecutar de forma variable o constante algo dependiendo del estado
         switch (currentCowState)
