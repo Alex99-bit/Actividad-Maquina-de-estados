@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
-public class checkPress2 : Node
+/*public class checkPress2 : Node
 {
 
     public checkPress2()
@@ -25,4 +25,4 @@ public class checkPress2 : Node
 
     }
 
-}
+}*/

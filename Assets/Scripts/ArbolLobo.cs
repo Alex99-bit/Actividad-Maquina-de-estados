@@ -4,92 +4,30 @@ using UnityEngine;
 
 public class ArbolLobo : MonoBehaviour
 {
-    // Enum para los estados del comportamiento
-    public enum BehaviorState
-    {
-        Idle,
-        Asechar,
-        Jugar,
-        Comer,
-        Descansar,
-        Muere
-    }
-
-    // Clase base para los nodos del árbol
-    public abstract class Node
-    {
-        public abstract BehaviorState Evaluate();
-    }
-
-    // Clase para los nodos de condición
-    public class ConditionNode : Node
-    {
-        private System.Func<bool> condition;
-
-        public ConditionNode(System.Func<bool> condition)
-        {
-            this.condition = condition;
-        }
-
-        public override BehaviorState Evaluate()
-        {
-            return condition() ? BehaviorState.Idle : BehaviorState.Muere;
-        }
-    }
-
-    // Clase para los nodos de acción
-    public class ActionNode : Node
-    {
-        private System.Action action;
-
-        public ActionNode(System.Action action)
-        {
-            this.action = action;
-        }
-
-        public override BehaviorState Evaluate()
-        {
-            action();
-            return BehaviorState.Idle;
-        }
-    }
-
-    // Clase para los nodos de secuencia
-    public class SequenceNode : Node
-    {
-        private Node[] nodes;
-
-        public SequenceNode(params Node[] nodes)
-        {
-            this.nodes = nodes;
-        }
-
-        public override BehaviorState Evaluate()
-        {
-            foreach (var node in nodes)
-            {
-                BehaviorState result = node.Evaluate();
-                if (result != BehaviorState.Idle)
-                {
-                    return result;
-                }
-            }
-            return BehaviorState.Idle;
-        }
-    }
-
     // Variables para el comportamiento del objeto
+    [SerializeField]
     private int comida = 100;
+    [SerializeField]
     private int estrés = 50;
+    [SerializeField]
     private int resistencia = 50;
+    [SerializeField]
     private bool comiendo = false;
+    [SerializeField]
     private bool zonaSegura = false;
 
     // Raíz del árbol de comportamiento
     private Node behaviorTreeRoot;
 
+    private BehaviorState currentState;
+
     void Start()
     {
+        // Inicializa los valores iniciales de comida, estrés y resistencia
+        comida = 100;
+        estrés = 50;
+        resistencia = 50;
+
         // Construye el árbol de comportamiento
         Node idle = new SequenceNode(
             new ConditionNode(() => comida < 30),
@@ -176,6 +114,87 @@ public class ArbolLobo : MonoBehaviour
     void Update()
     {
         // Evalúa el árbol de comportamiento en cada actualización
-        behaviorTreeRoot.Evaluate();
+        //behaviorTreeRoot.Evaluate();
+
+        // Evalúa el árbol de comportamiento en cada actualización
+        BehaviorState newState = behaviorTreeRoot.Evaluate();
+        if (newState != BehaviorState.Idle)
+        {
+            currentState = newState;
+        }
+    }
+}
+
+// Enum para los estados del comportamiento
+public enum BehaviorState
+{
+    Idle,
+    Asechar,
+    Jugar,
+    Comer,
+    Descansar,
+    Muere
+}
+
+// Clase base para los nodos del árbol
+public abstract class Node
+{
+    public abstract BehaviorState Evaluate();
+}
+
+// Clase para los nodos de condición
+public class ConditionNode : Node
+{
+    private System.Func<bool> condition;
+
+    public ConditionNode(System.Func<bool> condition)
+    {
+        this.condition = condition;
+    }
+
+    public override BehaviorState Evaluate()
+    {
+        return condition() ? BehaviorState.Idle : BehaviorState.Muere;
+    }
+}
+
+// Clase para los nodos de acción
+public class ActionNode : Node
+{
+    private System.Action action;
+
+    public ActionNode(System.Action action)
+    {
+        this.action = action;
+    }
+
+    public override BehaviorState Evaluate()
+    {
+        action();
+        return BehaviorState.Idle;
+    }
+}
+
+// Clase para los nodos de secuencia
+public class SequenceNode : Node
+{
+    private Node[] nodes;
+
+    public SequenceNode(params Node[] nodes)
+    {
+        this.nodes = nodes;
+    }
+
+    public override BehaviorState Evaluate()
+    {
+        foreach (var node in nodes)
+        {
+            BehaviorState result = node.Evaluate();
+            if (result != BehaviorState.Idle)
+            {
+                return result;
+            }
+        }
+        return BehaviorState.Idle;
     }
 }

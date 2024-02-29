@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using BehaviorTree;
 
-public class agenteCubo : Tree
+/*public class agenteCubo : Tree
 {
     int controlVal = 1;
     protected override Node SetupTree()
@@ -22,5 +22,5 @@ public class agenteCubo : Tree
 
         return root;
     }
-}
+}*/
 

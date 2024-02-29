@@ -4,7 +4,7 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class taskControl2Dos : Node
+/*public class taskControl2Dos : Node
 {
     public taskControl2Dos()
     {
@@ -22,4 +22,4 @@ public class taskControl2Dos : Node
         return state;
 
     }
-}
+}*/

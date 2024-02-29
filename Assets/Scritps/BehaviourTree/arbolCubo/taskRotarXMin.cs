@@ -4,7 +4,7 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class taskRotaXMin : Node
+/*public class taskRotaXMin : Node
 {
     Transform agenteTransform;
 
@@ -20,4 +20,4 @@ public class taskRotaXMin : Node
         state = NodeState.RUNNING;
         return state;
     }
-}
+}*/

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
-public class checkControl1 : Node
+/*public class checkControl1 : Node
 {
     int valControl;
     
@@ -26,4 +26,4 @@ public class checkControl1 : Node
 
     }
 
-}
+}*/

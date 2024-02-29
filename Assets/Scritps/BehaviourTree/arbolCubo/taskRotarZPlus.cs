@@ -4,7 +4,7 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class taskRotarZPlus : Node
+/*public class taskRotarZPlus : Node
 {
     Transform agenteTransform;
 
@@ -20,4 +20,4 @@ public class taskRotarZPlus : Node
         state = NodeState.RUNNING;
         return state;
     }
-}
+}*/

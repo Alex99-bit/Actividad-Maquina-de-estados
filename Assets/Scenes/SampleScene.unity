@@ -3283,7 +3283,7 @@ PrefabInstance:
       addedObject: {fileID: 1436084020}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1436084021}
+      addedObject: {fileID: 1436084023}
   m_SourcePrefab: {fileID: 100100000, guid: 9b90a443e81ac0d429be185d882c449f, type: 3}
 --- !u!1 &1436084011 stripped
 GameObject:
@@ -3429,7 +3429,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1436084021
+--- !u!114 &1436084023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3438,14 +3438,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1436084011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02f0937d3d2f0dc439711e06872a6b1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 919a7b353c1d9e44889b0a17404f1eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  idleFollow: {fileID: 1526177705}
-  timeDriver: 0
-  timeLapse: 0
-  radioBusqueda: 30
+  comida: 100
+  "estr\xE9s": 50
+  resistencia: 50
+  comiendo: 0
+  zonaSegura: 0
 --- !u!1 &1526177702
 GameObject:
   m_ObjectHideFlags: 0
